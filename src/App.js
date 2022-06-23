@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
+  SafeAreaView,
   Alert,
 } from 'react-native';
 import params from './params';
@@ -97,7 +98,7 @@ export default class App extends Component {
   render() {
 
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <LevelSelection
           isVisible={this.state.showLevelSelection}
           onLevelSelected={this.onLevelSelected}
@@ -116,7 +117,7 @@ export default class App extends Component {
             isLost = {this.state.lost}
           />
         </View>
-      </View>
+      </SafeAreaView>
     )
   }
 }
