@@ -5,15 +5,20 @@ import Mine from "./Mine"
 import Flag from "./Flag"
 
 export default props => {
-    const { mined, opened, nearMines, exploded, flagged } = props
+    const { mined, opened, nearMines, exploded, flagged,onCheckWon, onCheckLost} = props
 
     const styleField = [styles.field]
     // outros estilos aqui
-    if (opened) styleField.push(styles.opened)
+    if (onCheckWon|| onCheckLost){
+        if (opened) styleField.push(styles.openedFreeze)
+        if (!opened && !exploded) styleField.push(styles.regularFreeze)
+    }else{
+        if (opened) styleField.push(styles.opened)
+        if (!opened && !exploded) styleField.push(styles.regular)
+    }
     if (exploded) styleField.push(styles.exploded)
     if (flagged) styleField.push(styles.flagged)
-    if (!opened && !exploded) styleField.push(styles.regular)
-
+    
     let color = null
     if (nearMines > 0) {
         if (nearMines == 1) color = 'rgb(65,105,225)'
@@ -52,9 +57,22 @@ const styles = StyleSheet.create({
         borderRightColor: '#333',
         borderBottomColor: '#333'
     },
+    regularFreeze : {
+        backgroundColor: '#555',
+        borderLeftColor: '#888',
+        borderTopColor: '#888',
+        borderRightColor: '#000',
+        borderBottomColor: '#000'
+    },
     opened: {
         backgroundColor: '#999',
         borderColor: '#777',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    openedFreeze: {
+        backgroundColor: '#444',
+        borderColor: '#333',
         alignItems: 'center',
         justifyContent: 'center'
     },

@@ -28,6 +28,7 @@ export default class App extends Component {
     this.state = this.createState()
   }
 
+  
   minesAmount = () => {
     const cols = params.getColumnsAmount()
     const rows = params.getRowsAmount()
@@ -47,12 +48,17 @@ export default class App extends Component {
 
   onOpenField = (row, column) => {
     const board = cloneBoard(this.state.board)
-    openField(board, row, column)
+    if (this.state.won || this.state.lost){
+      return
+    } else {
+      openField(board, row, column)
+    }
     const lost = hadExplosion(board)
     const won = wonGame(board)
     if (lost) {
       showMines(board)
       Alert.alert('Você perdeu!', 'Até outra vida!')
+      
     }
     if (won) {
       Alert.alert('Parabéns...', '...não fez mais do que sua obrigação!')
@@ -62,7 +68,12 @@ export default class App extends Component {
 
   onSelectField = (row, column) => {
     const board = cloneBoard(this.state.board)
-    invertFlag(board, row, column)
+    
+    if (this.state.won || this.state.lost){
+      return 
+    } else {
+      invertFlag(board, row, column)
+    }
     const won = wonGame(board)
     if (won) {
       Alert.alert('Parabéns...', '...não fez mais do que sua obrigação!')
@@ -73,6 +84,14 @@ export default class App extends Component {
   onLevelSelected = level => {
     params.difficultLevel = level
     this.setState(this.createState())
+  }
+
+  freezeGame = status => {
+    if (status){
+      Object.freeze(this.state)
+      console.log('funfou mesmo?')
+      console.log(Object.isFrozen(this.state))
+    }
   }
 
   render() {
@@ -93,6 +112,8 @@ export default class App extends Component {
           <MineField board={this.state.board}
             onOpenField={this.onOpenField}
             onSelectField={this.onSelectField}
+            isWon = {this.state.won}
+            isLost = {this.state.lost}
           />
         </View>
       </View>

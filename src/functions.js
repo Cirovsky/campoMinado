@@ -8,7 +8,9 @@ const createBoard = (rows, columns) => {
                 flagged: false,
                 mined: false,
                 exploded: false,
-                nearMines: 0
+                nearMines: 0,
+                isWon: false,
+                isLost: false
             }
         })
     })
@@ -86,7 +88,10 @@ const hadExplosion = board => fields(board)
     .filter(field => field.exploded).length > 0
 const pendding = field => (field.mined && !field.flagged) 
     || (!field.mined && !field.opened)
+    
 const wonGame = board => fields(board).filter(pendding).length === 0
+
+
 const showMines = board => fields(board).filter(field => field.mined)
     .forEach(field => field.opened = true)
 
