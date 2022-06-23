@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  Text,
   View,
   Alert,
 } from 'react-native';
@@ -90,7 +89,7 @@ export default class App extends Component {
           onNewGame={() => this.setState(this.createState())}
           onFlagPress={() => this.setState({ showLevelSelection: true })}
         />
-        <View style={styles.board}>
+        <View style={styles.board} >
           <MineField board={this.state.board}
             onOpenField={this.onOpenField}
             onSelectField={this.onSelectField}

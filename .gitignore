@@ -61,7 +61,4 @@ buck-out/
 /vendor/bundle/
 
 #others paths
-__tests__/
-.blundle/
-android/
 ios/
