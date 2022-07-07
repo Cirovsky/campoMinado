@@ -1,10 +1,11 @@
-
 import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
   SafeAreaView,
   Alert,
+  Appearance,
+  useColorScheme
 } from 'react-native';
 import params from './params';
 import MineField from './components/MineField';
@@ -21,6 +22,7 @@ import {
   flagsUsed
 } from './functions';
 
+import { themeProvider } from './context/themeContext';
 
 export default class App extends Component {
 
@@ -29,7 +31,6 @@ export default class App extends Component {
     this.state = this.createState()
   }
 
-  
   minesAmount = () => {
     const cols = params.getColumnsAmount()
     const rows = params.getRowsAmount()
@@ -44,12 +45,13 @@ export default class App extends Component {
       won: false,
       lost: false,
       showLevelSelection: false,
+      theme: params.appTheme
     }
   }
 
   onOpenField = (row, column) => {
     const board = cloneBoard(this.state.board)
-    if (this.state.won || this.state.lost){
+    if (this.state.won || this.state.lost) {
       return
     } else {
       openField(board, row, column)
@@ -59,7 +61,7 @@ export default class App extends Component {
     if (lost) {
       showMines(board)
       Alert.alert('Você perdeu!', 'Até outra vida!')
-      
+
     }
     if (won) {
       Alert.alert('Parabéns...', '...não fez mais do que sua obrigação!')
@@ -69,9 +71,9 @@ export default class App extends Component {
 
   onSelectField = (row, column) => {
     const board = cloneBoard(this.state.board)
-    
-    if (this.state.won || this.state.lost){
-      return 
+
+    if (this.state.won || this.state.lost) {
+      return
     } else {
       invertFlag(board, row, column)
     }
@@ -87,17 +89,17 @@ export default class App extends Component {
     this.setState(this.createState())
   }
 
-  freezeGame = status => {
-    if (status){
-      Object.freeze(this.state)
-      console.log('funfou mesmo?')
-      console.log(Object.isFrozen(this.state))
-    }
+  toogleColorScheme = theme => {
+    params.appTheme = theme
+    //theme = theme === 'dark'? 'dark': 'light'
+    console.log('funfou?', theme)
+    this.setState({ theme })
   }
 
   render() {
 
     return (
+
       <SafeAreaView style={styles.container}>
         <LevelSelection
           isVisible={this.state.showLevelSelection}
@@ -108,13 +110,14 @@ export default class App extends Component {
           flagsLeft={this.minesAmount() - flagsUsed(this.state.board)}
           onNewGame={() => this.setState(this.createState())}
           onFlagPress={() => this.setState({ showLevelSelection: true })}
+          toogleColorScheme={this.toogleColorScheme}
         />
         <View style={styles.board} >
           <MineField board={this.state.board}
             onOpenField={this.onOpenField}
             onSelectField={this.onSelectField}
-            isWon = {this.state.won}
-            isLost = {this.state.lost}
+            isWon={this.state.won}
+            isLost={this.state.lost}
           />
         </View>
       </SafeAreaView>

@@ -6,6 +6,7 @@ const params = {
     fontSize: 15,
     headerRatio: 0.15, //proporção do painel superior
     difficultLevel: 0.1,
+    appTheme: 'light',
     getColumnsAmount(){
         const width =  Dimensions.get('window').width
         return Math.floor(width/this.blockSize)

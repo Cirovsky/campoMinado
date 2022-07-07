@@ -3,8 +3,11 @@ import { View, StyleSheet} from "react-native"
 import Field from "./Field"
 
 export default props => {
+    
     const checkWon = props.isWon
     const checkLost = props.isLost
+    const checkTheme = props.theme
+    console.log(checkTheme)
     const rows = props.board.map((row, r) => {
         const columns = row.map((field, c) =>{
             return <Field {...field} key={c} 
@@ -12,7 +15,6 @@ export default props => {
             onSelect = { () => props.onSelectField(r,c)}
             onCheckWon = {checkWon}
             onCheckLost = {checkLost}
-
             />
             
         })
