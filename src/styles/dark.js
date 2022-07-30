@@ -2,7 +2,7 @@ import { StyleSheet} from "react-native"
 import params from "../params"
 
 
-const normalColor =  ['#888','#555', '#444', '#333', '#000']
+const normalColor =  ['#CCC','#777', '#444', '#444', '#000']
 const freezeColor = ['#888', '#555', '#444','#333','#000']
 
 

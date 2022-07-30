@@ -19,10 +19,6 @@ export default props => {
             </View>
             <View style={styles.buttonContainer}>
                 <TouchableOpacity style={styles.button}
-                    onPress={()=> props.toogleColorScheme(theme)}>
-                    <Text style={styles.buttonLabel}>Padrão de Cor</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button}
                     onPress={props.onNewGame}>
                     <Text style={styles.buttonLabel}>New Game</Text>
                 </TouchableOpacity>
@@ -62,6 +58,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         paddingTop: 5,
         marginLeft: 20,
+        color: "#999"
     },
     button: {
         backgroundColor: '#999',

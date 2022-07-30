@@ -1,7 +1,7 @@
 import { StyleSheet} from "react-native"
 import params from "../params"
 
-const normalColor =  ['#CCC','#999', '#888', '#333', '#000']
+const normalColor =  ['#AAA','#333', '#888', '#333', '#000']
 const freezeColor = ['#888', '#555', '#444','#333','#000']
 
 const light = StyleSheet.create({
